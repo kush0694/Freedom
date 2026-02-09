@@ -1,0 +1,13 @@
+diff --git a/backend/server.py b/backend/server.py
+index 56737df..f0ba502 100644
+--- a/backend/server.py
++++ b/backend/server.py
+@@ -145,7 +145,7 @@ async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(s
+         return user_id
+     except jwt.ExpiredSignatureError:
+         raise HTTPException(status_code=401, detail="Token has expired")
+-    except jwt.JWTError:
++    except jwt.PyJWTError:
+         raise HTTPException(status_code=401, detail="Invalid token")
+ 
+ def calculate_freedom_score(user_id: str, identity_data: Optional[dict], baseline: Optional[dict], 
