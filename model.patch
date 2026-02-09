@@ -1,13 +1,31 @@
 diff --git a/backend/server.py b/backend/server.py
-index 56737df..f0ba502 100644
+index f0ba502..a342efe 100644
 --- a/backend/server.py
 +++ b/backend/server.py
 @@ -145,7 +145,7 @@ async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(s
          return user_id
      except jwt.ExpiredSignatureError:
          raise HTTPException(status_code=401, detail="Token has expired")
--    except jwt.JWTError:
-+    except jwt.PyJWTError:
+-    except jwt.PyJWTError:
++    except (jwt.JWTError, ValueError, Exception):
          raise HTTPException(status_code=401, detail="Invalid token")
  
  def calculate_freedom_score(user_id: str, identity_data: Optional[dict], baseline: Optional[dict], 
+diff --git a/model.patch b/model.patch
+index 4bdf3be..e69de29 100644
+--- a/model.patch
++++ b/model.patch
+@@ -1,13 +0,0 @@
+-diff --git a/backend/server.py b/backend/server.py
+-index 56737df..f0ba502 100644
+---- a/backend/server.py
+-+++ b/backend/server.py
+-@@ -145,7 +145,7 @@ async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(s
+-         return user_id
+-     except jwt.ExpiredSignatureError:
+-         raise HTTPException(status_code=401, detail="Token has expired")
+--    except jwt.JWTError:
+-+    except jwt.PyJWTError:
+-         raise HTTPException(status_code=401, detail="Invalid token")
+- 
+- def calculate_freedom_score(user_id: str, identity_data: Optional[dict], baseline: Optional[dict], 
