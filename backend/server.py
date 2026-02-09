@@ -243,6 +243,12 @@ def calculate_freedom_score(user_id: str, identity_data: Optional[dict], baselin
         insight=insight
     )
 
+# ==================== BASE ENDPOINTS ====================
+
+@api_router.get("/")
+async def root():
+    return {"message": "Freedom Score API", "version": "1.0.0"}
+
 # ==================== AUTH ENDPOINTS ====================
 
 @api_router.post("/auth/register", response_model=Token)
