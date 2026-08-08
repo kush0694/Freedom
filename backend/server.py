@@ -32,6 +32,17 @@ security = HTTPBearer()
 # Create the main app without a prefix
 app = FastAPI(title="Freedom Score API")
 
+
+# 2. Global CORS policy
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+    expose_headers=["*"],
+)
+
 # Create a router with the /api prefix
 api_router = APIRouter(prefix="/api")
 
